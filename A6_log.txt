@@ -1,0 +1,137 @@
+David Hanley
+200259844
+CS215
+
+Assignment 6
+
+
+http://www2.cs.uregina.ca/~hanley2d/A6/homepage.php
+
+relevant files for this assignment:
+
+js/like_dislike.js
+- first adds event listeners to all current like/dislike buttons
+- this file handles all the AJAX request functions for the post page (homepage.php)
+- function sendLike(e) is triggered when a user clicks on one of the arrow buttons. 
+	- the function then updates the like/dislike count and arrow style when the query is returned from the databse.
+	- sends id of like and dislike buttons through GET method 
+	- the function checks if the user liked or disliked then sends that to the database (like.php).
+	- parses JSON response in order to update likes/dislikes count for the user.
+- function updateLikes() is triggered with setInterval every 20 seconds
+	- queries the database at update.php to see if any posts have received new likes/dislikes and updates the information dynamically	
+- function updatePosts() is triggered every 90 seconds 
+	- finds the most recent post by id. then sends that to update_posts.php to check if there are any new posts.
+	- if there are new posts then JSON array is sent back to page and new posts will be inserted at the top of the page. new event listener is added when a new post is inserted.
+	- if there are more than 20 posts then the oldest posts will be deleted.
+
+likes.php
+- this file handles the request from sendLike(e).
+- checks if user liked or disliked based on $_GET data.
+- user can only like or dislike. deletes like if user dislikes previously liked post and vice versa.
+- will either insert new like/dislike, insert like/dislike and delete old like/dislike, or unlike/undislike a post.
+- after data has been inserted/deleted, there is a new query to return to sendLike(e) as a json array in order to update the vote counts and change the vote button style.
+
+update.php
+- this page handles request from updateLikes().
+- sends the number of likes/dislikes per post back as json encoded array.
+
+update_posts.php
+- this page handles request from updatePosts().
+- most recent post is received through GET method. checks if there are any newer posts and sends that query back to updatePosts().
+
+homepage.php
+- the main posts page.
+- recognizes if a user has previously liked or disliked a post.
+
+
+
+***********************************************************************************
+FROM Assignment 5
+
+http://www2.cs.uregina.ca/~hanley2d/A5/login.php
+
+homepage.php
+- page where posts will be loaded once the user is logged in.
+- not accessible if not logged in.
+
+login.php
+- user will be redirected here if not logged in.
+- checks user details for database match. if successful, user will be logged in.
+
+logout.php
+- placeholder page to logout user from session.
+
+post_repost.php
+- when the user posts something, the post will appear on homepage.php .
+
+signup.php
+- when user signs up successfully, they are redirected to login.php.
+
+user_detail.php
+- loads the posts from a particular user when that user is selected on the homepage.
+
+
+********************************************************************************
+FROM Assignment 3
+
+http://www2.cs.uregina.ca/~hanley2d/A3/homepage.html
+
+New files for assignment 3
+In js directory:
+
+like_dislike.js
+- this is the javascript code that controls the like and dislike arrows on the homepage and the user_detail.html page
+- when a user clicks on the icon, it changes to orange. if it is already orange, it changes back to white. 
+- if the like icon is already orange, then it changes to white when the dislike icon is selcted and vice versa.
+
+log-r.js
+- this file validates the login page.
+- it makes sure the user enters a proper email address and that there are no spaces in the password
+
+post_repost.js
+- this file checks the character count of what the user has posted. 
+- if the user has entered too many characters, it notifies the user by changing the character count to red.
+- will not submit if the user has too many characters.
+
+signup-r.js
+- this file validates the signup page.
+- it checks if all fields are empty and will notify the user if they are when the user tries to submit.
+- it specifically checks:
+	- the username so that there are no symbols or spaces.
+	- the email is a real email address.
+	- that date of birth is entered
+	- that a file has been submitted for avatar
+	- that the password is at least 6 characters and has at least 1 digit
+	- that the confirm password matches the password
+
+
+/**************************************/
+From Assignment 2:
+File listings:
+
+A2_homepage.html
+- this is the main page of the website where all the posts are displayed
+
+A2_stylesheet.css
+- this is the css file with the style for all of the pages
+
+login.html
+- this is the file for the login page. someone with an account can login here.
+if user does not have an account they can click the sign up link below
+
+post_repost.html
+- this is the file for the post page. when a user clicks post or repost they will be redirected here.
+once the user submits the post it will return to the homepage. (not implemented yet)
+
+signup.html
+- this is the page where the user can sign up to the site. if the user already has an account,
+they can click the link below to go to the login page.
+
+user_detail.html
+- this page displays all the posts from a particular user.
+
+sketches-storyboards.pdf
+- this file contains all of the sketches and storyboards made for the site. 
+
+
+the .jpeg files just contain the images for the user avatars.
