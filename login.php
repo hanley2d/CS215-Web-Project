@@ -6,7 +6,7 @@
 		$password = trim($_POST["pwrd"]);
 		if (strlen($email) > 0 && strlen($password) > 0) {
 			// load the database and verify the username/password
-			$db = new mysqli("localhost", "hanley2d", "th3ori3s", "hanley2d");
+			$db = new mysqli("localhost", "hanley2d", "password", "hanley2d");
 		  	if ($db->connect_error) {
 		  		die ("Connection failed: " . $db->connect_error);
 		  	}
