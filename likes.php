@@ -4,7 +4,7 @@ if(!isset($_SESSION["user_id"])) {
     header("Location: login.php");
     exit();
 }
-$db = new mysqli("localhost", "hanley2d", "th3ori3s", "hanley2d");
+$db = new mysqli("localhost", "hanley2d", "password", "hanley2d");
     if ($db->connect_error) {
         die ("Connection failed: " . $db->connect_error);
     }   
